@@ -12,14 +12,8 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-router.get('/:id', idValidation, async (req, res, next) => {
-    try {
-        const project = await Projects.get(req.params.id)
-        res.status(201).json(project)
-    }
-    catch(error) {
-        next(error)
-    }
+router.get('/:id', idValidation, async (req, res) => {
+    res.status(200).json(req.project)
 })
 
 router.post('/', bodyValidation, async (req, res, next) => {
@@ -30,5 +24,15 @@ router.post('/', bodyValidation, async (req, res, next) => {
         next(err)
     }
 })
+
+// router.put('/:id', idValidation, bodyValidation, async (req, res, next) => {
+//     const {id} = req.params
+//     try{
+//         const newProject = await Projects.update(id, req.updated)
+//         res.status(200).json(newProject)
+//     } catch (err) {
+//         next(err)
+//     }
+// })
 
 module.exports = router

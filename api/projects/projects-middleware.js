@@ -19,14 +19,14 @@ const idValidation = (req, res, next) => {
 
 const bodyValidation = (req, res, next) => {
   const {name, description, completed} = req.body
-  if(!name || !description || !completed) {
+  if(!name || !description || !completed ) {
     res.status(400).json({
       message: 'Name, description, or completed are not filled out'
     })
-  } else{
+  } else { 
     req.updated = {
-      name: name.trim(),
-      description: description.trim(),
+      name: name,
+      description: description,
       completed: completed,
     }
     next()
