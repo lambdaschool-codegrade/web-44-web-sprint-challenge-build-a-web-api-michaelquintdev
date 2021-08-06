@@ -19,19 +19,14 @@ const idValidation = (req, res, next) => {
 
 const bodyValidation = (req, res, next) => {
   const {name, description, completed} = req.body
-  if(!name || !description || !completed ) {
+  if(!name || !description || completed === undefined) {
     res.status(400).json({
-      message: 'Name, description, or completed are not filled out'
+      message: 'Name or description are not filled out'
     })
   } else { 
-    req.updated = {
-      name: name,
-      description: description,
-      completed: completed,
+      next()
     }
-    next()
   }
-}
 
 module.exports = {
     bodyValidation,
